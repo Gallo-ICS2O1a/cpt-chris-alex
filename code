@@ -1,0 +1,24 @@
+ayerpaddle = PVector(100, 250)
+def setup():
+    size(1300, 500)
+    background(225)
+def draw():
+    global playerpaddle
+    
+    fill(19, 48, 219)
+    # big circle target
+    ellipse(1020, 250, 400, 400)
+    fill(225)
+    # 3rd circle - 2nd from biggest
+    ellipse(1020, 250, 279, 279)
+    fill(219, 38, 59)
+    # 2nd circle - 2nd from middle
+    ellipse(1020, 250, 130, 130)
+    fill(225)
+    # smallest circle - center
+    ellipse(1020, 250, 50, 50)
+    
+    
+    
+    ellipse(playerpaddle.x, playerpaddle.y, 58, 58)
+    
