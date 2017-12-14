@@ -1,4 +1,4 @@
-ayerpaddle = PVector(100, 250)
+playerpaddle = PVector(100, 250)
 def setup():
     size(1300, 500)
     background(225)
