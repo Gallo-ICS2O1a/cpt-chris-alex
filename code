@@ -7,7 +7,7 @@ pos = PVector(100, 250)
 speed = PVector(3,0)
 button_size = 200
 button_x = 650
-button_y = 450
+button_y = 350
 page = 1
 
 def setup():
@@ -30,12 +30,13 @@ def draw():
     fill(0)
     textSize(75)
     text("Curling Game", 450, 200)
-    text("Start", 450, 475)
+    text("Start", 560, 375)
     textSize(25)
     
     if page == 2:
         fill(255)
-        fill(0)
+        fill(225)
+        rect(1300, 1300, 1300, 1300)
         fill(19, 48, 219)
         # big circle target
         ellipse(1020, 250, 350, 350)
@@ -75,4 +76,3 @@ def mouseClicked():
     hypotenuse = sqrt(distance_x ** 2 + distance_y ** 2)
     if hypotenuse <= radius:
         page += 1
-    
