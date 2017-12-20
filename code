@@ -1,7 +1,7 @@
-
 rockSize = 49
 overRock = None
 locked = None
+speed = PVector(3, 0)
 RED = (255,0,0)
 GREEN = (0,255,0)
 BLUE = (0,0,255)
@@ -19,10 +19,11 @@ def setup():
     global ry
     size(1300, 500)
     background(225)
-    frameRate(30)
+    # frameRate(30)
     rx = width/2
     ry = height/2
     rectMode(RADIUS)
+
 def draw():
     global rx
     global ry
@@ -43,6 +44,7 @@ def draw():
     text("Curling Game", 450, 200)
     text("Start", 560, 375)
     textSize(25)
+    
     
     
     if page == 2:
@@ -77,6 +79,8 @@ def draw():
             stroke(153)
             fill(153)
             overBox = False
+            
+    
 
 def mousePressed():
     global rx
@@ -95,17 +99,17 @@ def mousePressed():
 def mouseDragged():
     global rx
     global ry
-    global locked
-    global xOffset
-    global yOffset
     
-    if locked == True:
-        rx = mouseX-xOffset
-        ry = mouseY-yOffset
+    ry = mouseY
+    rx = mouseX
+    
+    
 
 def mouseReleased():
-    global locked
-    locked = False
+    global rx
+    global ry
+    
+    rx = mouseX + 700
     
 def mouseClicked():
     global button_size, button_x, button_y, page
@@ -115,3 +119,4 @@ def mouseClicked():
     hypotenuse = sqrt(distance_x ** 2 + distance_y ** 2)
     if hypotenuse <= radius:
         page += 1
+ 
