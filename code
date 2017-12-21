@@ -11,6 +11,7 @@ button_y = 350
 page = 1
 pos = PVector(100, 250)
 target = PVector(1020, 250)
+pos_dwaynejohnson = PVector(150, 250)
 
 
 
@@ -34,6 +35,7 @@ def draw():
     global page
     global pos
     global target
+    global pos_dwaynejohnson
     
     background(255)
     
@@ -67,16 +69,25 @@ def draw():
         ellipse(target.x, target.y, 50, 50)
         
         fill(0, 225, 0)
-        ellipse(pos.x, pos.y, rockSize, rockSize)   
+        ellipse(pos.x, pos.y, rockSize, rockSize)  
+        fill(0, 0, 225) 
+        ellipse(pos_dwaynejohnson.x, pos_dwaynejohnson.y, rockSize, rockSize)
         
-        vector_angle = PVector.sub(pos, target)
-        dist = vector_angle.mag()
-        print(dist)
+        # vector_angle = PVector.sub(pos, target)
+        # dist = vector_angle.mag()
+        # print(dist)
         
-          #Test if the cursor is over the rock
+          
+         
+         #Collision detection
+    dist = pos_dwaynejohnson.x - pos.x 
+    print(dist)
+    if dist >= 10:
+        pos_dwaynejohnson.x 
         
         
         
+       #Test if the cursor is over the rock 
     if (mouseX > rx-rockSize and mouseX < rx+rockSize and
         mouseY > ry-rockSize and mouseY < ry+rockSize):
         overRock = True
@@ -87,6 +98,9 @@ def draw():
             stroke(153)
             fill(153)
             overBox = False
+            
+
+    
             
     
 
@@ -118,12 +132,7 @@ def mouseDragged():
 def mouseReleased():
     global pos
     
-    pos.x = speed.x 
-    
-    
-
-    
-    
+    pos = pos + speed * 1
     
 def mouseClicked():
     global button_size, button_x, button_y, page
