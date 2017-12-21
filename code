@@ -5,12 +5,12 @@ speed = PVector(3, 0)
 RED = (255,0,0)
 GREEN = (0,255,0)
 BLUE = (0,0,255)
-speed = PVector(3,0)
 button_size = 200
 button_x = 650
 button_y = 350
 page = 1
-
+pos = PVector(100, 250)
+target = PVector(1020, 250)
 
 
 
@@ -32,6 +32,8 @@ def draw():
     global locked
     global overBox
     global page
+    global pos
+    global target
     
     background(255)
     
@@ -53,21 +55,27 @@ def draw():
         rect(1300, 1300, 1300, 1300)
         fill(19, 48, 219)
         # big circle target
-        ellipse(1020, 250, 350, 350)
+        ellipse(target.x, target.y, 350, 350)
         fill(225)
         # 3rd circle - 2nd from biggest
-        ellipse(1020, 250, 250, 250)
+        ellipse(target.x, target.y, 250, 250)
         fill(219, 38, 59)
         # 2nd circle - 2nd from middle
-        ellipse(1020, 250,150, 150)
+        ellipse(target.x, target.y ,150, 150)
         fill(225)
         # smallest circle - center
-        ellipse(1020, 250, 50, 50)
+        ellipse(target.x, target.y, 50, 50)
         
         fill(0, 225, 0)
-        ellipse(rx, ry, rockSize, rockSize)   
+        ellipse(pos.x, pos.y, rockSize, rockSize)   
         
-        #Test if the cursor is over the rock
+        vector_angle = PVector.sub(pos, target)
+        dist = vector_angle.mag()
+        print(dist)
+        
+          #Test if the cursor is over the rock
+        
+        
         
     if (mouseX > rx-rockSize and mouseX < rx+rockSize and
         mouseY > ry-rockSize and mouseY < ry+rockSize):
@@ -87,7 +95,7 @@ def mousePressed():
     global ry
     global overRock
     global locked
-    
+    global pos
     if overRock == True:
         locked = True
         fill(255)
@@ -99,17 +107,23 @@ def mousePressed():
 def mouseDragged():
     global rx
     global ry
+    global pos
     
-    ry = mouseY
-    rx = mouseX
+    pos.x = mouseX
+    pos.y = mouseY
     
     
 
-def mouseReleased():
-    global rx
-    global ry
     
-    rx = mouseX + 700
+def mouseReleased():
+    global pos
+    
+    pos.x = speed.x 
+    
+    
+
+    
+    
     
 def mouseClicked():
     global button_size, button_x, button_y, page
@@ -119,4 +133,3 @@ def mouseClicked():
     hypotenuse = sqrt(distance_x ** 2 + distance_y ** 2)
     if hypotenuse <= radius:
         page += 1
- 
