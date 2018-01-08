@@ -2,6 +2,8 @@ rockSize = 49
 overRock = None
 locked = None
 speed = PVector(3, 0)
+acceleration = PVector(0.9, 0)
+deceleration = PVector(-1, 0)
 RED = (255,0,0)
 GREEN = (0,255,0)
 BLUE = (0,0,255)
@@ -70,8 +72,7 @@ def draw():
         
         fill(0, 225, 0)
         ellipse(pos.x, pos.y, rockSize, rockSize)  
-        fill(0, 0, 225) 
-        ellipse(pos_dwaynejohnson.x, pos_dwaynejohnson.y, rockSize, rockSize)
+    
         
         # vector_angle = PVector.sub(pos, target)
         # dist = vector_angle.mag()
@@ -80,10 +81,7 @@ def draw():
           
          
          #Collision detection
-    dist = pos_dwaynejohnson.x - pos.x 
-    print(dist)
-    if dist >= 10:
-        pos_dwaynejohnson.x 
+    
         
         
         
@@ -122,17 +120,26 @@ def mouseDragged():
     global rx
     global ry
     global pos
+    global speed
+    global acceleration
     
-    pos.x = mouseX
-    pos.y = mouseY
+
+    
+    speed.add(acceleration)
+    pos.add(speed)
     
     
 
     
 def mouseReleased():
     global pos
+    global speed
+    global acceleration
+    global deceleration
     
-    pos = pos + speed * 1
+    speed.add(deceleration)
+    pos.add(speed)
+
     
 def mouseClicked():
     global button_size, button_x, button_y, page
