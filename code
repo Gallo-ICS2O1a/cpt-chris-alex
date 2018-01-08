@@ -78,6 +78,9 @@ def draw():
         # dist = vector_angle.mag()
         # print(dist)
         
+        if pos.x > width/2:
+            ellipse(pos_dwaynejohnson.x, pos_dwaynejohnson.y, 49, 49) 
+        
           
          
          #Collision detection
@@ -128,7 +131,7 @@ def mouseDragged():
     speed.add(acceleration)
     pos.add(speed)
     
-    if pos.x > width - 200:
+    if pos.x > width/2:
         ellipse(pos_dwaynejohnson.x, pos_dwaynejohnson.y, 49, 49) 
     if pos.x > width:
         pos.x = width - 49
