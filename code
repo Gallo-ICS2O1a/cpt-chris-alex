@@ -14,6 +14,7 @@ page = 1
 pos = PVector(100, 250)
 target = PVector(1020, 250)
 pos_dwaynejohnson = PVector(150, 250)
+mouseAngle = 0
 
 
 
@@ -95,6 +96,8 @@ def draw():
         
         
         
+        
+        
          
          #Collision detection
     
@@ -132,7 +135,7 @@ def mousePressed():
     xOffset = mouseX-rx
     yOffset = mouseY-ry
 
-def mouseDragged():
+def mousePressed():
     global rx
     global ry
     global pos
@@ -145,6 +148,8 @@ def mouseDragged():
     pos.add(speed)
     if pos.x > width/2:
         pos_dwaynejohnson.add(speed)
+        
+    mouseAngle += Playermouse
     
     
 def mouseReleased():
@@ -152,11 +157,31 @@ def mouseReleased():
     global speed
     global acceleration
     global deceleration
-    
+    pos = mouseAngle
+   
     speed.add(acceleration)
     pos.add(speed)
+   
     if pos.x > width/2:
         pos_dwaynejohnson.add(speed)
+        
+def mouseDragged():
+    global pos
+    global speed
+    global acceleration
+    
+    Playermouse = PVector(mouseX, mouseY)
+    angle_a = PVector.sub(Playermouse, pos)
+    dist_a = angle_a.mag()
+        
+    angleofplayer = angle_a.heading()
+    Vector = PVector.fromAngle(angleofplayer)
+    print(Vector)
+    
+   
+    
+    
+    
 
     
 def mouseClicked():
