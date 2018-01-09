@@ -132,7 +132,7 @@ def mousePressed():
     xOffset = mouseX-rx
     yOffset = mouseY-ry
 
-def mousePressed():
+def mouseDragged():
     global rx
     global ry
     global pos
@@ -147,7 +147,7 @@ def mousePressed():
         pos_dwaynejohnson.add(speed)
     
     
-def mouseDragged():
+def mouseReleased():
     global pos
     global speed
     global acceleration
