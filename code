@@ -16,8 +16,6 @@ target = PVector(1020, 250)
 pos_dwaynejohnson = PVector(150, 250)
 mouseAngle = 0
 
-
-
 def setup():
     global rx
     global ry
@@ -39,7 +37,7 @@ def draw():
     global pos
     global target
     global pos_dwaynejohnson
-    
+    global mouseAngle
     background(255)
     
     # Start button
@@ -51,8 +49,6 @@ def draw():
     text("Curling Game", 450, 200)
     text("Start", 560, 375)
     textSize(25)
-    
-    
     
     if page == 2:
         fill(255)
@@ -85,25 +81,23 @@ def draw():
             pos.x = width - 49
         
     
-        Playermouse = PVector(mouseX, mouseY)
-        angle_a = PVector.sub(Playermouse, pos)
-        dist_a = angle_a.mag()
+        # Playermouse = PVector(mouseX, mouseY)
+        # angle_a = PVector.sub(Playermouse, pos)
+        # dist_a = angle_a.mag()
         
-        angleofplayer = angle_a.heading()
+        # angleofplayer = angle_a.heading()
         
-        Vector = PVector.fromAngle(angleofplayer)
-        print(Vector)
+        # Vector = PVector.fromAngle(angleofplayer)
+        # # print(Vector)
         
-        
-        
-        
-        
-         
-         #Collision detection
-    
-        
-        
-        
+        if mousePressed == True:
+            mouseAngle = PVector(mouseX, mouseY)
+            # print(mouseAngle)
+            angle = PVector.sub(mouseAngle, pos)
+            arrowangle = angle.heading()
+            vect = PVector.fromAngle(arrowangle)
+            print(vect)
+
        #Test if the cursor is over the rock 
     if (mouseX > rx-rockSize and mouseX < rx+rockSize and
         mouseY > ry-rockSize and mouseY < ry+rockSize):
@@ -116,11 +110,6 @@ def draw():
             fill(153)
             overBox = False
             
-
-    
-            
-    
-
 def mousePressed():
     global rx
     global ry
@@ -141,48 +130,20 @@ def mousePressed():
     global pos
     global speed
     global acceleration
-    
+    global mouseAngle
+    global Playermouse
 
-
-    speed.add(acceleration)
-    pos.add(speed)
-    if pos.x > width/2:
-        pos_dwaynejohnson.add(speed)
-        
-    mouseAngle += Playermouse
-    
-    
 def mouseReleased():
     global pos
     global speed
     global acceleration
     global deceleration
-    pos = mouseAngle
-   
-    speed.add(acceleration)
-    pos.add(speed)
-   
-    if pos.x > width/2:
-        pos_dwaynejohnson.add(speed)
-        
+
+    
 def mouseDragged():
     global pos
     global speed
     global acceleration
-    
-    Playermouse = PVector(mouseX, mouseY)
-    angle_a = PVector.sub(Playermouse, pos)
-    dist_a = angle_a.mag()
-        
-    angleofplayer = angle_a.heading()
-    Vector = PVector.fromAngle(angleofplayer)
-    print(Vector)
-    
-   
-    
-    
-    
-
     
 def mouseClicked():
     global button_size, button_x, button_y, page
