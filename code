@@ -2,7 +2,7 @@ rockSize = 49
 overRock = None
 locked = None
 speed = PVector(3, 0)
-acceleration = PVector(0.01, 0)
+acceleration = PVector(0.001, 0)
 deceleration = PVector(-1, 0)
 RED = (255,0,0)
 GREEN = (0,255,0)
@@ -15,6 +15,9 @@ pos = PVector(100, 250)
 target = PVector(1020, 250)
 pos_dwaynejohnson = PVector(150, 250)
 mouseAngle = 0
+ease = 0.06
+score = 0
+nospeed = PVector(0, 0)
 
 def setup():
     global rx
@@ -97,7 +100,20 @@ def draw():
             arrowangle = angle.heading()
             vect = PVector.fromAngle(arrowangle)
             print(vect)
-
+            speed.sub(vect)
+        
+        
+        
+        # mosx = mouseX
+        # mousee = mosx - pos.x
+        # pos.x += mousee * ease
+        
+        # mosy = mouseY
+        # mouseey = mosy = pos.y
+        # pos.y += mouseey * ease
+        
+        textSize(90)
+        text("Score: " + str(score), 100, 100)
        #Test if the cursor is over the rock 
     if (mouseX > rx-rockSize and mouseX < rx+rockSize and
         mouseY > ry-rockSize and mouseY < ry+rockSize):
@@ -132,19 +148,35 @@ def mousePressed():
     global acceleration
     global mouseAngle
     global Playermouse
+    
+
+    
 
 def mouseReleased():
     global pos
     global speed
     global acceleration
-    global deceleration
-
+    global nospeed
     
+    pos.add(nospeed)
+    
+   
 def mouseDragged():
     global pos
     global speed
     global acceleration
     
+    if mousePressed == True:
+        mouseAngle = pos
+        
+    speed.add(acceleration)
+    pos.add(speed)    
+    
+
+    
+
+    
+        
 def mouseClicked():
     global button_size, button_x, button_y, page
     radius = button_size / 2.0
