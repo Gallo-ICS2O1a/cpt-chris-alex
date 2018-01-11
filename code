@@ -18,6 +18,7 @@ mouseAngle = 0
 ease = 0.06
 score = 0
 nospeed = PVector(0, 0)
+target_dist = PVector(0, 0)
 
 def setup():
     global rx
@@ -82,8 +83,7 @@ def draw():
             ellipse(pos_dwaynejohnson.x, pos_dwaynejohnson.y, 49, 49) 
         if pos.x > width:
             pos.x = width - 49
-        
-    
+
         # Playermouse = PVector(mouseX, mouseY)
         # angle_a = PVector.sub(Playermouse, pos)
         # dist_a = angle_a.mag()
@@ -101,9 +101,7 @@ def draw():
             vect = PVector.fromAngle(arrowangle)
             print(vect)
             speed.sub(vect)
-        
-        
-        
+            
         # mosx = mouseX
         # mousee = mosx - pos.x
         # pos.x += mousee * ease
@@ -149,16 +147,20 @@ def mousePressed():
     global mouseAngle
     global Playermouse
     
-
-    
-
 def mouseReleased():
     global pos
     global speed
     global acceleration
     global nospeed
+    global target
+    global target_dist
     
-    pos.add(nospeed)
+    target_dist = PVector.sub(target, pos)
+    
+    if target_dist.x < 100 and target_dist.x > -100 and target_dist.y < 100 and target_dist.y > -100:
+        score += 5
+    elif target_dist.x > 100 and target_dist.x < 200 and target_dist.x < -100 and target_dist.x > - 200 and target_dist.y > 100 and target_dist.y < 200 and target_dist.y < -100 and target_dist.x > - 200:
+        score += 4
     
    
 def mouseDragged():
@@ -172,11 +174,6 @@ def mouseDragged():
     speed.add(acceleration)
     pos.add(speed)    
     
-
-    
-
-    
-        
 def mouseClicked():
     global button_size, button_x, button_y, page
     radius = button_size / 2.0
