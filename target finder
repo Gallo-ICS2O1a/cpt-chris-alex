@@ -1,0 +1,2 @@
+    if target_dist.x and target_dist.y > 100:
+        score += 5
