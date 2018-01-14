@@ -1,8 +1,8 @@
 rockSize = 49
 overRock = None
 locked = None
-speed = PVector(3, 0)
-acceleration = PVector(0.001, 0)
+speed = PVector(1, 0)
+acceleration = PVector(-1, 0)
 deceleration = PVector(-1, 0)
 RED = (255,0,0)
 GREEN = (0,255,0)
@@ -14,11 +14,12 @@ page = 1
 pos = PVector(100, 250)
 target = PVector(1020, 250)
 pos_dwaynejohnson = PVector(150, 250)
-mouseAngle = 0
+mouseAngle = PVector( 0, 0)
 ease = 0.06
 score = 0
 nospeed = PVector(0, 0)
 target_dist = PVector(0, 0)
+
 
 def setup():
     global rx
@@ -99,7 +100,7 @@ def draw():
             angle = PVector.sub(mouseAngle, pos)
             arrowangle = angle.heading()
             vect = PVector.fromAngle(arrowangle)
-            print(vect)
+            # print(vect)
             speed.sub(vect)
             
         # mosx = mouseX
@@ -112,6 +113,8 @@ def draw():
         
         textSize(90)
         text("Score: " + str(score), 100, 100)
+        fill(0)
+        line(200, 250, mouseX, mouseY) 
        #Test if the cursor is over the rock 
     if (mouseX > rx-rockSize and mouseX < rx+rockSize and
         mouseY > ry-rockSize and mouseY < ry+rockSize):
@@ -138,7 +141,7 @@ def mousePressed():
     xOffset = mouseX-rx
     yOffset = mouseY-ry
 
-def mousePressed():
+def mouseDragged():
     global rx
     global ry
     global pos
@@ -146,34 +149,43 @@ def mousePressed():
     global acceleration
     global mouseAngle
     global Playermouse
+    global nospeed
+    
+
+    pos.add(speed)
+    if score == range(1, 6):
+        pos.add(acceleration)
+        pos_dwaynejohnson.add(speed)
     
 def mouseReleased():
-    global pos
+    global posr
     global speed
     global acceleration
     global nospeed
     global target
     global target_dist
+    global score
     
-    target_dist = PVector.sub(target, pos)
     
-    if target_dist.x < 100 and target_dist.x > -100 and target_dist.y < 100 and target_dist.y > -100:
+    target_distx = target.x - pos.x
+    print(target_distx)
+    target_disty = target.y - pos.y
+    print(target_disty)
+    
+    if target_distx < 50 and target_distx > -50 and target_disty < 50 and target_disty > -50:
         score += 5
-    elif target_dist.x > 100 and target_dist.x < 200 and target_dist.x < -100 and target_dist.x > - 200 and target_dist.y > 100 and target_dist.y < 200 and target_dist.y < -100 and target_dist.x > - 200:
-        score += 4
+    elif target_distx < 100 and target_distx > -100 and  target_disty < 100 and target_disty > -100:
+        score += 3
+    elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
+        score += 2
     
-   
-def mouseDragged():
-    global pos
-    global speed
-    global acceleration
     
     if mousePressed == True:
         mouseAngle = pos
-        
-    speed.add(acceleration)
-    pos.add(speed)    
-    
+    if score == range(1, 6):
+        pos.add(acceleration)
+        pos_dwaynejohnson.add(speed) 
+               
 def mouseClicked():
     global button_size, button_x, button_y, page
     radius = button_size / 2.0
@@ -182,3 +194,5 @@ def mouseClicked():
     hypotenuse = sqrt(distance_x ** 2 + distance_y ** 2)
     if hypotenuse <= radius:
         page += 1
+    if target_dist.x and target_dist.y > 100:
+        score += 5
