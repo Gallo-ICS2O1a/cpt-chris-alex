@@ -158,7 +158,7 @@ def mouseDragged():
         pos_dwaynejohnson.add(speed)
     
 def mouseReleased():
-    global posr
+    global pos
     global speed
     global acceleration
     global nospeed
