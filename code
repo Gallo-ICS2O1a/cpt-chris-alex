@@ -15,10 +15,13 @@ pos = PVector(100, 250)
 target = PVector(1020, 250)
 pos_dwaynejohnson = PVector(150, 250)
 mouseAngle = PVector( 0, 0)
-ease = 0.06
+easing = 0.05
 score = 0
 nospeed = PVector(0, 0)
 target_dist = PVector(0, 0)
+mouseAngleX = 1
+mouseAngleY = 1
+topspeed = 5
 
 
 def setup():
@@ -30,6 +33,7 @@ def setup():
     rx = width/2
     ry = height/2
     rectMode(RADIUS)
+    frameRate(9000000000)
 
 def draw():
     global rx
@@ -43,6 +47,7 @@ def draw():
     global target
     global pos_dwaynejohnson
     global mouseAngle
+    global easing
     background(255)
     
     # Start button
@@ -51,7 +56,7 @@ def draw():
     # Title
     fill(0)
     textSize(75)
-    text("Curling Game", 450, 200)
+    text("Curling...Kind of", 280, 200)
     text("Start", 560, 375)
     textSize(25)
     
@@ -84,63 +89,45 @@ def draw():
             ellipse(pos_dwaynejohnson.x, pos_dwaynejohnson.y, 49, 49) 
         if pos.x > width:
             pos.x = width - 49
+            
+        
+        targetX = mouseAngle.x
+        dx = targetX - pos.x
+        pos.x += dx* easing
+        
+        targetY = mouseAngle.y
+        dy = targetY - pos.y
+        pos.y += dy * easing
 
-        # Playermouse = PVector(mouseX, mouseY)
-        # angle_a = PVector.sub(Playermouse, pos)
-        # dist_a = angle_a.mag()
-        
-        # angleofplayer = angle_a.heading()
-        
-        # Vector = PVector.fromAngle(angleofplayer)
-        # # print(Vector)
-        
         if mousePressed == True:
             mouseAngle = PVector(mouseX, mouseY)
             # print(mouseAngle)
-            angle = PVector.sub(mouseAngle, pos)
+            angle = PVector.sub(pos, mouseAngle)
             arrowangle = angle.heading()
             vect = PVector.fromAngle(arrowangle)
             # print(vect)
             speed.sub(vect)
-            
-        # mosx = mouseX
-        # mousee = mosx - pos.x
-        # pos.x += mousee * ease
-        
-        # mosy = mouseY
-        # mouseey = mosy = pos.y
-        # pos.y += mouseey * ease
         
         textSize(90)
         text("Score: " + str(score), 100, 100)
-        fill(0)
+        
+        fill(225, 0, 0)
         line(200, 250, mouseX, mouseY) 
        #Test if the cursor is over the rock 
-    if (mouseX > rx-rockSize and mouseX < rx+rockSize and
-        mouseY > ry-rockSize and mouseY < ry+rockSize):
-        overRock = True
-        if locked != True:
-            stroke(255)
-            fill(153)
-        else:
-            stroke(153)
-            fill(153)
-            overBox = False
-            
+               
 def mousePressed():
-    global rx
-    global ry
-    global overRock
-    global locked
-    global pos
-    if overRock == True:
-        locked = True
-        fill(255)
-    else:
-        locked = False
-    xOffset = mouseX-rx
-    yOffset = mouseY-ry
+    global pos, mouseAngleX, mouseAngleY
+    
 
+    
+    mouseAngleX = mouseX
+    dx = mouseAngleX - pos.x
+    pos.x += dx * easing
+    
+    mouseAngleY = mouseY
+    dy = mouseAngleY - pos.y
+    pos.y += dy * easing
+    
 def mouseDragged():
     global rx
     global ry
@@ -151,12 +138,10 @@ def mouseDragged():
     global Playermouse
     global nospeed
     
-
     pos.add(speed)
     if score == range(1, 6):
-        pos.add(acceleration)
-        pos_dwaynejohnson.add(speed)
-    
+        pos.sub(speed)
+        
 def mouseReleased():
     global pos
     global speed
@@ -165,6 +150,8 @@ def mouseReleased():
     global target
     global target_dist
     global score
+    global topspeed
+    global easing
     
     
     target_distx = target.x - pos.x
@@ -178,6 +165,9 @@ def mouseReleased():
         score += 3
     elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
         score += 2
+        
+    pos.x = mouseAngleX + topspeed
+    pos.y = mouseAngleY + topspeed
     
     
     if mousePressed == True:
