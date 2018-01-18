@@ -1,7 +1,7 @@
 rockSize = 49
 overRock = None
 locked = None
-speed = PVector(1, 0)
+speed = PVector(0.1, 0)
 acceleration = PVector(-1, 0)
 deceleration = PVector(-1, 0)
 RED = (255,0,0)
@@ -126,7 +126,7 @@ def draw():
         textSize(90)
         text("Score: " + str(score), 100, 100)
         
-        thing = mouseX - 500
+        thing = mouseX - 200
         if mouseX < width/2 - 200:
             thing = mouseX
         fill(225, 0, 0)
@@ -165,7 +165,9 @@ def mouseDragged():
     mouseAngle = pos
     pos = pos + speed
     if mouseReleased == True:
-        pos.add(acceleration)
+        pos = pos + acceleration
+    
+
 
     
 # def mouseDragged():
@@ -203,11 +205,11 @@ def mouseReleased():
     elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
         score += 2
         
-    if mousePressed == True:
-        mouseAngle = pos
-    if score == range(1, 6):
-        pos.add(acceleration)
-        pos_dwaynejohnson.add(speed) 
+    # if mousePressed == True:
+    #     mouseAngle = pos
+    # if score == range(1, 6):
+    #     pos.add(acceleration)
+    #     pos_dwaynejohnson.add(speed) 
                
 def mouseClicked():
     global button_size, button_x, button_y, page
