@@ -126,8 +126,8 @@ def draw():
         textSize(90)
         text("Score: " + str(score), 100, 100)
         
-        thing = mouseX - 200
-        if mouseX < width/2 - 200:
+        thing = mouseX - 500
+        if mouseX < width/2:
             thing = mouseX
         fill(225, 0, 0)
         line(arrow.x, arrow.y, thing, mouseY) 
@@ -150,6 +150,7 @@ def mouseDragged():
     global topspeed
     global mouseAngle
     global speed
+    global pos_dwaynejohnson 
     
     # mouseAngleX = pos.x
     # dx = mouseAngleX - pos.x
@@ -164,23 +165,19 @@ def mouseDragged():
     
     mouseAngle = pos
     pos = pos + speed
-    if mouseReleased == True:
-        pos = pos + acceleration
-    
+    if score == range(1, 6):
+        mouseAngle != pos
+        pos != pos + speed
 
 
+
+    radius4 = 49 / 2.0
+    distance_x4 = abs(mouseX - pos_dwaynejohnson.x )
+    distance_y4 = abs(mouseY - pos_dwaynejohnson.y)
+    hypotenuse4 = sqrt(distance_x4 ** 2 + distance_y4 ** 2)
+    if hypotenuse4 <= radius4 and mouseDragged == True:
+        pos_dwaynejohnson = pos_dwaynejohnson + speed
     
-# def mouseDragged():
-#     global rx
-#     global ry
-#     global pos
-#     global speed
-#     global acceleration
-#     global mouseAngle
-#     global Playermouse
-#     global nospeed
-   
-        
 def mouseReleased():
     global pos
     global speed
@@ -191,7 +188,8 @@ def mouseReleased():
     global score
     global topspeed
     global easing
-    
+    global pos_dwaynejohnson
+    global mouseAngle
     
     target_distx = target.x - pos.x
     # print(target_distx)
@@ -205,16 +203,17 @@ def mouseReleased():
     elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
         score += 2
         
-    # if mousePressed == True:
-    #     mouseAngle = pos
-    # if score == range(1, 6):
-    #     pos.add(acceleration)
-    #     pos_dwaynejohnson.add(speed) 
+    mouseAngle != pos
+    pos != pos + speed
+   
+    mouseAngle = pos_dwaynejohnson
+    pos_dwaynejohnson = pos_dwaynejohnson + speed
                
 def mouseClicked():
     global button_size, button_x, button_y, page
     global button_size2, button_x2, button_y2
     global button_size3, button_x3, button_y3
+    global pos_dwaynejohnson
     radius = button_size / 2.0
     distance_x = abs(mouseX - button_x)
     distance_y = abs(mouseY - button_y)
@@ -236,3 +235,5 @@ def mouseClicked():
         hypotenuse3 = sqrt(distance_x3 ** 2 + distance_y3 ** 2)
         if hypotenuse3 <= radius3:
             page -= 2
+            
+
