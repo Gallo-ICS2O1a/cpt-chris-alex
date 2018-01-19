@@ -130,7 +130,7 @@ def draw():
             speed.sub(vect)
             
             distance = width - mouseX
-            print(distance)
+            # print(distance)
     
         textSize(90)
         text("Score: " + str(score), 100, 100)
@@ -153,7 +153,8 @@ def mousePressed():
     global rocks1
     global rocks2
     
-    current_rock = rocks1.pop()
+    current_rock = rocks1.pop(0)
+    print(current_rock)
     
     
        
