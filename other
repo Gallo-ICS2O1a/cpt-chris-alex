@@ -1,7 +1,10 @@
 rockSize = 49
 overRock = None
 locked = None
-speed = PVector(0.1, 0)
+speed = PVector(0.2, 0)
+speed2 = PVector(0.2, 0)
+speed3 = PVector(0.2, 0)
+speed4 = PVector(0.2, 0)
 acceleration = PVector(-1, 0)
 deceleration = PVector(-1, 0)
 RED = (255,0,0)
@@ -18,21 +21,27 @@ button_y3 = 400
 button_size3 = 100
 page = 1
 pos = PVector(20, 100)
-pos2 = PVector(60, 100)
-target = PVector(1020, 250)
+pos2 = PVector(80, 100)
 pos3 = PVector(20, 450)
-pos4 = PVector(60, 450)
+pos4 = PVector(80, 450)
+pos_new = PVector(100, 250)
+pos_new2 = PVector(100, 250)
+pos_new3 = PVector(100, 250)
+pos_new4 = PVector(100, 250)
+target = PVector(1020, 250)
 mouseAngle = PVector(0, 0)
 easing = 0.05
-score = 0
+score1 = 0
 nospeed = PVector(0, 0)
 target_dist = PVector(0, 0)
 mouseAngleX = 1
 mouseAngleY = 1
 topspeed = 5
 arrow = PVector(200, 250)
-rocks1 = [pos, pos2]
-rocks2 = [[pos3, speed], [pos4, speed]]
+score2 = 0
+
+# rocks1 = [pos, pos2]
+# rocks2 = [[pos3, speed], [pos4, speed]]
 
 def setup():
     global rx
@@ -53,15 +62,21 @@ def draw():
     global locked
     global overBox
     global page
-    global pos
+    global pos, pos_new
     global target
-    global pos2
+    global pos2, pos_new2
     global mouseAngle
     global easing
     global page
     global arrow
     global rocks1
     global rocks2
+    global pos3, pos_new3
+    global pos4, pos_new4
+    global speed2
+    global speed3
+    global speed4
+    
     background(255)
     
     # Start button
@@ -72,9 +87,13 @@ def draw():
     textSize(75)
     text("Curling Simulator 20000", 280, 200)
     text("Start", 560, 375)
-    textSize(25)
-    fill(0, 0, 225)
+    
+    fill(225, 0,0)
     ellipse(button_x2, button_y2, button_size2, button_size2)
+    fill(225)
+    textSize(15)
+    text("how to play", button_x2 - 40, button_y2)
+
     
     if page == 2:
         fill(255)
@@ -102,7 +121,12 @@ def draw():
         # fill(225, 888, 32049587)
         # ellipse(button_x3, button_y3, button_size3, button_size3)
     
-        
+        # current_rock = rocks1.pop()
+        # print(current_rock)
+
+
+            
+       
         # vector_angle = PVector.sub(pos, target)
         # dist = vector_angle.mag()
         # print(dist)
@@ -111,51 +135,92 @@ def draw():
         #     ellipse(pos3.x, pos3.y, 49, 49) 
         # if pos.x > width:
         #     pos.x = width - 49
-            
-        # targetX = mouseAngle.x
-        # dx = targetX - pos.x
-        # pos.x += dx* easing
-        
-        # targetY = mouseAngle.y
-        # dy = targetY - pos.y
-        # pos.y += dy * easing
+
 
         if mousePressed == True:
             mouseAngle = PVector(mouseX, mouseY)
-            # print(mouseAngle)
+            print(mouseAngle)
             angle = PVector.sub(pos, mouseAngle)
             arrowangle = angle.heading()
             vect = PVector.fromAngle(arrowangle)
             # print(vect)
             speed.sub(vect)
             
-            distance = width - mouseX
-            # print(distance)
+            mouseAngle2 = PVector(mouseX, mouseY)
+            angle2 = PVector.sub(pos2, mouseAngle2)
+            arrowangle2 = angle2.heading()
+            vect2 = PVector.fromAngle(arrowangle2)
+            speed2.sub(vect2)
+            
+            mouseAngle3 = PVector(mouseX, mouseY)
+            angle3 = PVector.sub(pos3, mouseAngle3)
+            arrowangle3 = angle3.heading()
+            vect3 = PVector.fromAngle(arrowangle3)
+            speed3.sub(vect3)
+            
+            mouseAngle4 = PVector(mouseX, mouseY)
+            angle4 = PVector.sub(pos4, mouseAngle4)
+            arrowangle4 = angle4.heading()
+            vect4 = PVector.fromAngle(arrowangle4)
+            speed4.sub(vect2)
+      
     
-        textSize(90)
-        text("Score: " + str(score), 100, 100)
+            # distance = width - mouseX
+                # print(distance)
+        # arrowI = PVector(mouseX, mouseY)        
+        # speed = arrowI.mag()
+        # print(speed)
+        textSize(40)
+        text("Score: " + str(score1), 100, 100)
+        text("Score: " + str(score2), 400, 100)
         
         thing = mouseX - 500
         if mouseX < width/2:
             thing = mouseX
         fill(225, 0, 0)
         line(arrow.x, arrow.y, thing, mouseY)
+    if keyCode == UP:
+        pos = pos_new
+    if keyCode == RIGHT:
+        pos2 = pos_new2
+    elif keyCode == DOWN:
+        pos3 = pos_new3
+    elif keyCode == LEFT:
+        pos4 = pos_new4
+    
+    
+
         
     if page == 3:
         background(0)
         textSize(30)
         text("Use the line to aim your shot", 10, 30)
+        text("to move the rock to the starting position, use the arrow keys", 10, 60)
+        text("the UP and RIGHT keys are for player one, the down an left ones are for player2", 10, 120)
         fill(225)
-        # ellipse(button_x3, button_y3, button_size3, button_size3)
+        ellipse(button_x3, button_y3, button_size3, button_size3)
         
-        
+
 def mousePressed():
     global rocks1
     global rocks2
+    global pos_new, pos_new2, pos_new3, pos_new4
+    global speed, speed2, speed3, speed4
     
-    current_rock = rocks1.pop(0)
-    print(current_rock)
-    
+    if keyCode == UP :
+        mouseAngle = pos_new
+        pos_new = pos_new + speed
+    elif keyCode == RIGHT:
+        mouseAngle = pos_new2
+        pos_new = pos_new2 + speed2
+    elif keyCode == DOWN :
+        mouseAngle = pos_new3
+        pos_new3 = pos_new3 + speed3
+    elif keyCode == LEFT :
+        mouseAngle = pos_new4
+        pos_new4 = pos_new4 + speed4
+
+
     
        
     
@@ -163,14 +228,40 @@ def mouseDragged():
     global pos, mouseAngleX, mouseAngleY
     global topspeed
     global mouseAngle
-    global speed
+    global speed, speed2, speed3, speed4
     global pos2 
-
-    mouseAngle = pos
-    pos = pos + speed
+    global pos3
+    global pos4
+    global pos_new
+    global pos_new2
+    global pos_new3
+    global pos_new4
     
-
-
+    if keyCode == UP :
+        mouseAngle = pos_new
+        pos_new = pos_new + speed
+    elif keyCode == RIGHT:
+        mouseAngle = pos_new2
+        pos_new = pos_new2 + speed2
+    elif keyCode == DOWN :
+        mouseAngle = pos_new3
+        pos_new3 = pos_new3 + speed3
+    elif keyCode == LEFT :
+        mouseAngle = pos_new4
+        pos_new4 = pos_new4 + speed4
+        
+    target_distx = target.x - pos.x
+    # print(target_distx)
+    target_disty = target.y - pos.y
+    # print(target_disty)
+    if mouseReleased == True:
+        if target_distx < 50 and target_distx > -50 and target_disty < 50 and target_disty > -50:
+            score1 += 5
+        elif target_distx < 100 and target_distx > -100 and  target_disty < 100 and target_disty > -100:
+            score1 += 3
+        elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
+            score1 += 2
+    
     
 def mouseReleased():
     global pos
@@ -184,18 +275,20 @@ def mouseReleased():
     global easing
     global pos2
     global mouseAngle
+    global score1
     
     target_distx = target.x - pos.x
     # print(target_distx)
     target_disty = target.y - pos.y
     # print(target_disty)
-    
+
     if target_distx < 50 and target_distx > -50 and target_disty < 50 and target_disty > -50:
-        score += 5
+        score1 += 5
     elif target_distx < 100 and target_distx > -100 and  target_disty < 100 and target_disty > -100:
-        score += 3
+        score1 += 3
     elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
-        score += 2
+        score1 += 2
+    
         
 
                
