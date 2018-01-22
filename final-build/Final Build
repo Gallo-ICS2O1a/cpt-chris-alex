@@ -1,8 +1,8 @@
 rockSize = 49
 overRock = None
 locked = None
-speed = PVector(0.1, 0)
-speed2 = PVector(0.1, 0)
+speed = PVector(0.01, 0)
+speed2 = PVector(0.01, 0)
 speed3 = PVector(0.1, 0)
 speed4 = PVector(0.1, 0)
 acceleration = PVector(-1, 0)
@@ -189,13 +189,20 @@ def draw():
         pos4 = pos_new4
     
     if pos_new.x and pos_new2.x and pos_new3.x and pos_new4.x > width/2:
-        text("Game Over", width/2 - 200, height/2)
+        if score1 < score2:
+            textSize(50)
+            text("Player 2 wins! OH yeah!!!", width/2 - 200, height/2)
+        elif score1 > score2:
+            textSize(50)
+            text("Player 1 wins! OHHHyeah", width/2 - 200, height/2) 
+        
     if page == 3:
         background(0)
         textSize(30)
         text("Use the line to aim your shot", 10, 30)
         text("to move the rock to the starting position, use the arrow keys", 10, 60)
         text("the UP and RIGHT keys are for player one, the down an left ones are for player2", 10, 120)
+        text("very unfair game, player one will always win", 10, 150)
         fill(225)
         ellipse(button_x3, button_y3, button_size3, button_size3)
         
@@ -233,14 +240,12 @@ def mouseDragged():
         pos_new2 = pos_new2 - speed
     elif keyCode == DOWN:
         mouseAngle = pos_new3
-        pos_new3 = pos_new3 - speed
+        pos_new3 = pos_new3 - speed 
     elif keyCode == LEFT:
         mouseAngle = pos_new4
-        pos_new4 = pos_new4 - speed
+        pos_new4 = pos_new4 - speed 
         
-   
-    
-    
+
 def mouseReleased():
     global pos
     global speed
@@ -279,6 +284,7 @@ def mouseReleased():
         score1 += 3
     elif target_distx2 < 150 and target_distx2 > -150 and target_disty2 < 150 and target_disty2 > -150:
         score1 += 2
+    
     
     target_distx3 = target.x - pos3.x
     # print(target_distx)
