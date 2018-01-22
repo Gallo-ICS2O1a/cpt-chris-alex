@@ -7,9 +7,6 @@ speed3 = PVector(0.1, 0)
 speed4 = PVector(0.1, 0)
 acceleration = PVector(-1, 0)
 deceleration = PVector(-1, 0)
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
 button_size = 200
 button_x = 650
 button_y = 350
@@ -43,6 +40,7 @@ score2 = 0
 # rocks1 = [pos, pos2]
 # rocks2 = [[pos3, speed], [pos4, speed]]
 
+
 def setup():
     global rx
     global ry
@@ -53,6 +51,7 @@ def setup():
     ry = height/2
     rectMode(RADIUS)
     frameRate(9000000000)
+
 
 def draw():
     global rx
@@ -87,14 +86,13 @@ def draw():
     textSize(75)
     text("Curling Simulator 20000", 280, 200)
     text("Start", 560, 375)
-    
+
     fill(0, 0,225)
     ellipse(button_x2, button_y2, button_size2, button_size2)
     fill(225)
     textSize(15)
     text("How to Play", button_x2 - 40, button_y2)
 
-    
     if page == 2:
         fill(255)
         fill(225)
@@ -107,34 +105,32 @@ def draw():
         ellipse(target.x, target.y, 250, 250)
         fill(219, 38, 59)
         # 2nd circle - 2nd from middle
-        ellipse(target.x, target.y ,150, 150)
+        ellipse(target.x, target.y, 150, 150)
         fill(225)
         # smallest circle - center
         ellipse(target.x, target.y, 50, 50)
-        
+
         fill(0, 225, 0)
         ellipse(pos.x, pos.y, rockSize, rockSize)  
         ellipse(pos2.x, pos2.y, rockSize, rockSize)
-        fill(23457890,12374890,12374182390471)
+        fill(23457890, 12374890, 12374182390471)
         ellipse(pos3.x, pos3.y, rockSize, rockSize)
         ellipse(pos4.x, pos4.y, rockSize, rockSize)
-        
+
         # fill(225, 888, 32049587)
         # ellipse(button_x3, button_y3, button_size3, button_size3)
     
         # current_rock = rocks1.pop()
         # print(current_rock)
-        
+
         # vector_angle = PVector.sub(pos, target)
         # dist = vector_angle.mag()
         # print(dist)
         # fill(225, 0, 0)
         # if pos.x > width/2 + 200:
-        #     ellipse(pos3.x, pos3.y, 49, 49) 
+        # ellipse(pos3.x, pos3.y, 49, 49) 
         # if pos.x > width:
         #     pos.x = width - 49
-
-
         if mousePressed == True:
             mouseAngle = PVector(mouseX, mouseY)
             print(mouseAngle)
@@ -143,28 +139,28 @@ def draw():
             vect = PVector.fromAngle(arrowangle)
             # print(vect)
             speed.sub(vect)
-            
+
             mouseAngle2 = PVector(mouseX, mouseY)
             angle2 = PVector.sub(pos2, mouseAngle2)
             arrowangle2 = angle2.heading()
             vect2 = PVector.fromAngle(arrowangle2)
             speed2.sub(vect2)
-            
+
             mouseAngle3 = PVector(mouseX, mouseY)
             angle3 = PVector.sub(pos3, mouseAngle3)
             arrowangle3 = angle3.heading()
             vect3 = PVector.fromAngle(arrowangle3)
             speed3.sub(vect3)
-            
+
             mouseAngle4 = PVector(mouseX, mouseY)
             angle4 = PVector.sub(pos4, mouseAngle4)
             arrowangle4 = angle4.heading()
             vect4 = PVector.fromAngle(arrowangle4)
             speed4.sub(vect4)
       
-    
-            # distance = width - mouseX
-                # print(distance)
+
+        # distance = width - mouseX
+            # print(distance)
         # arrowI = PVector(mouseX, mouseY)        
         # speed = arrowI.mag()
         # print(speed)
@@ -187,7 +183,7 @@ def draw():
         pos3 = pos_new3
     elif keyCode == LEFT:
         pos4 = pos_new4
-    
+
     if pos_new.x and pos_new2.x and pos_new3.x and pos_new4.x > width/2:
         if score1 < score2:
             textSize(50)
@@ -212,12 +208,6 @@ def mousePressed():
     global rocks2
     global pos_new, pos_new2, pos_new3, pos_new4
     global speed, speed2, speed3, speed4
-    
-
-
-
-    
-       
     
 def mouseDragged():
     global pos, mouseAngleX, mouseAngleY
@@ -308,10 +298,7 @@ def mouseReleased():
         score2 += 3
     elif target_distx4 < 150 and target_distx4 > -150 and target_disty4 < 150 and target_disty4 > -150:
         score2 += 2
-    
-        
-
-               
+                  
 def mouseClicked():
     global button_size, button_x, button_y, page
     global button_size2, button_x2, button_y2
