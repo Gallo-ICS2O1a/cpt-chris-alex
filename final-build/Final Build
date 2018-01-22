@@ -191,7 +191,8 @@ def draw():
     
     
 
-        
+    if pos_new.x and pos_new2.x and pos_new3.x and pos_new4.x > width/2:
+        text("Game Over", width/2 - 200, height/2)
     if page == 3:
         background(0)
         textSize(30)
