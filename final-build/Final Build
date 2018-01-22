@@ -87,7 +87,7 @@ def draw():
     text("Curling Simulator 20000", 280, 200)
     text("Start", 560, 375)
 
-    fill(0, 0,225)
+    fill(0, 0, 225)
     ellipse(button_x2, button_y2, button_size2, button_size2)
     fill(225)
     textSize(15)
@@ -157,10 +157,8 @@ def draw():
             arrowangle4 = angle4.heading()
             vect4 = PVector.fromAngle(arrowangle4)
             speed4.sub(vect4)
-      
-
         # distance = width - mouseX
-            # print(distance)
+        # print(distance)
         # arrowI = PVector(mouseX, mouseY)        
         # speed = arrowI.mag()
         # print(speed)
@@ -198,7 +196,7 @@ def draw():
         text("Use the line to aim your shot", 10, 30)
         text("to move the rock to the starting position, use the arrow keys", 10, 60)
         text("the UP and RIGHT keys are for player one, the down an left ones are for player2", 10, 120)
-        text("very unfair game, player one will always win", 10, 150)
+        
         fill(225)
         ellipse(button_x3, button_y3, button_size3, button_size3)
         
@@ -208,6 +206,7 @@ def mousePressed():
     global rocks2
     global pos_new, pos_new2, pos_new3, pos_new4
     global speed, speed2, speed3, speed4
+    
     
 def mouseDragged():
     global pos, mouseAngleX, mouseAngleY
@@ -230,10 +229,10 @@ def mouseDragged():
         pos_new2 = pos_new2 - speed
     elif keyCode == DOWN:
         mouseAngle = pos_new3
-        pos_new3 = pos_new3 - speed 
+        pos_new3 = pos_new3 - speed
     elif keyCode == LEFT:
         mouseAngle = pos_new4
-        pos_new4 = pos_new4 - speed 
+        pos_new4 = pos_new4 - speed
         
 
 def mouseReleased():
@@ -258,7 +257,7 @@ def mouseReleased():
 
     if target_distx < 50 and target_distx > -50 and target_disty < 50 and target_disty > -50:
         score1 += 5
-    elif target_distx < 100 and target_distx > -100 and  target_disty < 100 and target_disty > -100:
+    elif target_distx < 100 and target_distx > -100 and target_disty < 100 and target_disty > -100:
         score1 += 3
     elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
         score1 += 2
@@ -294,16 +293,18 @@ def mouseReleased():
 
     if target_distx4 < 50 and target_distx4 > -50 and target_disty4 < 50 and target_disty4 > -50:
         score2 += 5
-    elif target_distx4 < 100 and target_distx4 > -100 and  target_disty4 < 100 and target_disty4 > -100:
+    elif target_distx4 < 100 and target_distx4 > -100 and target_disty4 < 100 and target_disty4 > -100:
         score2 += 3
     elif target_distx4 < 150 and target_distx4 > -150 and target_disty4 < 150 and target_disty4 > -150:
         score2 += 2
-                  
+     
+     
 def mouseClicked():
     global button_size, button_x, button_y, page
     global button_size2, button_x2, button_y2
     global button_size3, button_x3, button_y3
-    global pos_dwaynejohnson
+    global pos_dwaynejohnso
+
     radius = button_size / 2.0
     distance_x = abs(mouseX - button_x)
     distance_y = abs(mouseY - button_y)
