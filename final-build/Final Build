@@ -75,9 +75,9 @@ def draw():
     global speed2
     global speed3
     global speed4
-    
+
     background(255)
-    
+
     # Start button
     fill(255, 0, 0)
     ellipse(button_x, button_y, button_size, button_size)
@@ -111,7 +111,7 @@ def draw():
         ellipse(target.x, target.y, 50, 50)
 
         fill(0, 225, 0)
-        ellipse(pos.x, pos.y, rockSize, rockSize)  
+        ellipse(pos.x, pos.y, rockSize, rockSize)
         ellipse(pos2.x, pos2.y, rockSize, rockSize)
         fill(23457890, 12374890, 12374182390471)
         ellipse(pos3.x, pos3.y, rockSize, rockSize)
@@ -119,7 +119,6 @@ def draw():
 
         # fill(225, 888, 32049587)
         # ellipse(button_x3, button_y3, button_size3, button_size3)
-    
         # current_rock = rocks1.pop()
         # print(current_rock)
 
@@ -128,7 +127,7 @@ def draw():
         # print(dist)
         # fill(225, 0, 0)
         # if pos.x > width/2 + 200:
-        # ellipse(pos3.x, pos3.y, 49, 49) 
+        # ellipse(pos3.x, pos3.y, 49, 49)
         # if pos.x > width:
         #     pos.x = width - 49
         if mousePressed == True:
@@ -159,15 +158,14 @@ def draw():
             speed4.sub(vect4)
         # distance = width - mouseX
         # print(distance)
-        # arrowI = PVector(mouseX, mouseY)        
+        # arrowI = PVector(mouseX, mouseY)
         # speed = arrowI.mag()
         # print(speed)
-        
         textSize(40)
         fill(69, 69, 69)
         text("PLAYER1 Score: " + str(score1), 100, 100)
         text("PLAYER2 Score: " + str(score2), 600, 100)
-        
+
         thing = mouseX - 500
         if mouseX < width/2:
             thing = mouseX
@@ -188,39 +186,39 @@ def draw():
             text("Player 2 wins! OH yeah!!!", width/2 - 200, height/2)
         elif score1 > score2:
             textSize(50)
-            text("Player 1 wins! OHHHyeah", width/2 - 200, height/2) 
-        
+            text("Player 1 wins! OHHHyeah", width/2 - 200, height/2)
+
     if page == 3:
         background(0)
         textSize(30)
         text("Use the line to aim your shot", 10, 30)
         text("to move the rock to the starting position, use the arrow keys", 10, 60)
         text("the UP and RIGHT keys are for player one, the down an left ones are for player2", 10, 120)
-        
+        text("arrows should go - up - down - right - left", 10, 170)
         fill(225)
         ellipse(button_x3, button_y3, button_size3, button_size3)
-        
+
 
 def mousePressed():
     global rocks1
     global rocks2
     global pos_new, pos_new2, pos_new3, pos_new4
     global speed, speed2, speed3, speed4
-    
-    
+
+
 def mouseDragged():
     global pos, mouseAngleX, mouseAngleY
     global topspeed
     global mouseAngle
     global speed, speed2, speed3, speed4
-    global pos2 
+    global pos2
     global pos3
     global pos4
     global pos_new
     global pos_new2
     global pos_new3
     global pos_new4
-    
+
     if keyCode == UP:
         mouseAngle = pos_new
         pos_new = pos_new + speed
@@ -233,7 +231,7 @@ def mouseDragged():
     elif keyCode == LEFT:
         mouseAngle = pos_new4
         pos_new4 = pos_new4 - speed
-        
+
 
 def mouseReleased():
     global pos
@@ -249,7 +247,7 @@ def mouseReleased():
     global mouseAngle
     global score1
     global score2
-    
+
     target_distx = target.x - pos.x
     # print(target_distx)
     target_disty = target.y - pos.y
@@ -261,7 +259,7 @@ def mouseReleased():
         score1 += 3
     elif target_distx < 150 and target_distx > -150 and target_disty < 150 and target_disty > -150:
         score1 += 2
-            
+
     target_distx2 = target.x - pos2.x
     # print(target_distx)
     target_disty2 = target.y - pos2.y
@@ -273,8 +271,6 @@ def mouseReleased():
         score1 += 3
     elif target_distx2 < 150 and target_distx2 > -150 and target_disty2 < 150 and target_disty2 > -150:
         score1 += 2
-    
-    
     target_distx3 = target.x - pos3.x
     # print(target_distx)
     target_disty3 = target.y - pos3.y
@@ -297,8 +293,8 @@ def mouseReleased():
         score2 += 3
     elif target_distx4 < 150 and target_distx4 > -150 and target_disty4 < 150 and target_disty4 > -150:
         score2 += 2
-     
-     
+
+
 def mouseClicked():
     global button_size, button_x, button_y, page
     global button_size2, button_x2, button_y2
@@ -311,14 +307,14 @@ def mouseClicked():
     hypotenuse = sqrt(distance_x ** 2 + distance_y ** 2)
     if hypotenuse <= radius:
         page += 1
-    
+
     radius2 = button_size2 / 2.0
     distance_x2 = abs(mouseX - button_x2)
     distance_y2 = abs(mouseY - button_y2)
     hypotenuse2 = sqrt(distance_x2 ** 2 + distance_y2 ** 2)
     if hypotenuse2 <= radius2:
         page += 2
-        
+
     if page == 3:
         radius3 = button_size3 / 2.0
         distance_x3 = abs(mouseX - button_x3)
